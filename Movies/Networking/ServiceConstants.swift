@@ -18,6 +18,7 @@ struct ServiceConstants {
     struct APIParameterKey {
         static let page = "page"
         static let apiKey = "api_key"
+        static let query = "query"
     }
 }
 

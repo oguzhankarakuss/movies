@@ -12,9 +12,9 @@ import Alamofire
 enum Router: URLRequestConvertible {
     case nowPlaying(page: Int)
     case upcoming(page: Int)
-    case searchMovie(page: Int)
-    case movieDetail(movieId: String)
-    case similarMovie(movieId: String, page: Int)
+    case searchMovie(query: String ,page: Int)
+    case movieDetail(movieId: Int)
+    case similarMovie(movieId: Int, page: Int)
 }
     
 extension Router {
@@ -35,12 +35,12 @@ extension Router {
             case .nowPlaying:
                 return "/movie/now_playing"
             case .movieDetail(let movieId):
-                return "“movie/\(movieId)"
+                return "movie/\(movieId)"
             case .upcoming:
                 return "/movie/upcoming"
             case .searchMovie:
                 return "/search/movie"
-            case .similarMovie(let movieId):
+            case .similarMovie(let movieId, _):
                 return "movie/\(movieId)/similar"
                 
         }
@@ -51,13 +51,15 @@ extension Router {
         var params: Parameters = [ServiceConstants.APIParameterKey.apiKey: ServiceConstants.ProductionServer.apiKey]
             switch self {
             case .nowPlaying(let page),
-                 .upcoming(let page),
-                 .searchMovie(let page):
-                 params[ServiceConstants.APIParameterKey.page] = page
-            case .similarMovie(let page):
+                 .upcoming(let page):
+                params[ServiceConstants.APIParameterKey.page] = page
+            case .similarMovie(_, let page):
                 params[ServiceConstants.APIParameterKey.page] = page
             case .movieDetail:
                 return .url(params)
+            case .searchMovie(let query, let page):
+                params[ServiceConstants.APIParameterKey.query] = "\(query)"
+                params[ServiceConstants.APIParameterKey.page] = page
         }
         return .url(params)
     }
@@ -91,6 +93,8 @@ extension Router {
                 components?.queryItems = queryParams
                 urlRequest.url = components?.url
         }
+        print("- - - - - - URL - - - - - -")
+        print("url: \(String(describing: urlRequest.url?.absoluteString))")
         return urlRequest
     }
 }
