@@ -29,6 +29,11 @@
 		3322C4E02449D13C002FD15D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4DF2449D13C002FD15D /* Extensions.swift */; };
 		3322C4E42449DA3E002FD15D /* DynamicValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4E32449DA3E002FD15D /* DynamicValue.swift */; };
 		3322C4E62449DA69002FD15D /* GenericDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4E52449DA69002FD15D /* GenericDataSource.swift */; };
+		3322C4F62449E6F8002FD15D /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4F52449E6F8002FD15D /* BaseTableView.swift */; };
+		3322C4F82449E71F002FD15D /* BaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4F72449E71F002FD15D /* BaseCollectionView.swift */; };
+		3322C4FA2449E82C002FD15D /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4F92449E82C002FD15D /* BaseTableViewCell.swift */; };
+		3322C4FC2449E873002FD15D /* PublicProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4FB2449E873002FD15D /* PublicProtocols.swift */; };
+		3322C4FE2449E89B002FD15D /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4FD2449E89B002FD15D /* BaseCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +60,11 @@
 		3322C4DF2449D13C002FD15D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3322C4E32449DA3E002FD15D /* DynamicValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicValue.swift; sourceTree = "<group>"; };
 		3322C4E52449DA69002FD15D /* GenericDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDataSource.swift; sourceTree = "<group>"; };
+		3322C4F52449E6F8002FD15D /* BaseTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
+		3322C4F72449E71F002FD15D /* BaseCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionView.swift; sourceTree = "<group>"; };
+		3322C4F92449E82C002FD15D /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		3322C4FB2449E873002FD15D /* PublicProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicProtocols.swift; sourceTree = "<group>"; };
+		3322C4FD2449E89B002FD15D /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		347455F5C21C22667FF7BCDB /* Pods-Movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.debug.xcconfig"; path = "Target Support Files/Pods-Movies/Pods-Movies.debug.xcconfig"; sourceTree = "<group>"; };
 		B3E10BDB488E6EBA2670D8CC /* Pods_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4FA156DF79558F9CD8EFC5D /* Pods-Movies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.release.xcconfig"; path = "Target Support Files/Pods-Movies/Pods-Movies.release.xcconfig"; sourceTree = "<group>"; };
@@ -193,8 +203,10 @@
 		3322C4D92449CEF4002FD15D /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				3322C4F42449E6E0002FD15D /* BaseComponents */,
 				3322C4DA2449CF42002FD15D /* BaseViewController.swift */,
 				3322C4DC2449D02C002FD15D /* BaseView.swift */,
+				3322C4FB2449E873002FD15D /* PublicProtocols.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -205,6 +217,33 @@
 				3322C4DF2449D13C002FD15D /* Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3322C4F42449E6E0002FD15D /* BaseComponents */ = {
+			isa = PBXGroup;
+			children = (
+				3322C5002449E8B6002FD15D /* CollectionView */,
+				3322C4FF2449E8AF002FD15D /* TableView */,
+			);
+			path = BaseComponents;
+			sourceTree = "<group>";
+		};
+		3322C4FF2449E8AF002FD15D /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				3322C4F52449E6F8002FD15D /* BaseTableView.swift */,
+				3322C4F92449E82C002FD15D /* BaseTableViewCell.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		3322C5002449E8B6002FD15D /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				3322C4F72449E71F002FD15D /* BaseCollectionView.swift */,
+				3322C4FD2449E89B002FD15D /* BaseCollectionViewCell.swift */,
+			);
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		851116C8FFF679ED016843BD /* Pods */ = {
@@ -343,11 +382,15 @@
 				3322C4CC2449AFB6002FD15D /* BaseResponse.swift in Sources */,
 				3322C4CE2449B12A002FD15D /* NowPlaying.swift in Sources */,
 				3322C4D22449B32E002FD15D /* MoviewDetail.swift in Sources */,
+				3322C4FA2449E82C002FD15D /* BaseTableViewCell.swift in Sources */,
 				3322C4A32446F64A002FD15D /* ViewController.swift in Sources */,
+				3322C4FE2449E89B002FD15D /* BaseCollectionViewCell.swift in Sources */,
 				3322C4DB2449CF42002FD15D /* BaseViewController.swift in Sources */,
 				3322C4B82448D192002FD15D /* TargetType.swift in Sources */,
 				3322C4B42448D0C5002FD15D /* Router.swift in Sources */,
 				3322C4E62449DA69002FD15D /* GenericDataSource.swift in Sources */,
+				3322C4FC2449E873002FD15D /* PublicProtocols.swift in Sources */,
+				3322C4F82449E71F002FD15D /* BaseCollectionView.swift in Sources */,
 				3322C4C92449AE69002FD15D /* Upcoming.swift in Sources */,
 				3322C49F2446F64A002FD15D /* AppDelegate.swift in Sources */,
 				3322C4E42449DA3E002FD15D /* DynamicValue.swift in Sources */,
@@ -357,6 +400,7 @@
 				3322C4DD2449D02C002FD15D /* BaseView.swift in Sources */,
 				3322C4C0244905A0002FD15D /* Service.swift in Sources */,
 				3322C4A12446F64A002FD15D /* SceneDelegate.swift in Sources */,
+				3322C4F62449E6F8002FD15D /* BaseTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
