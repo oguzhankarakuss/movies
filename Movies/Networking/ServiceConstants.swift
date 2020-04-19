@@ -13,6 +13,8 @@ struct ServiceConstants {
     struct ProductionServer {
         static let baseURL = "https://api.themoviedb.org/3"
         static let apiKey = "531a0d6c7e6b2aca4d80027962fecf64"
+        static let imageBaseURL = "http://image.tmdb.org/t/p/original"
+        static let imdbBaseUrl = "https://www.imdb.com/title/"
     }
     
     struct APIParameterKey {
