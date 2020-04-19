@@ -1,5 +1,5 @@
 //
-//  SimilarMovies.swift
+//  MovieList.swift
 //  Movies
 //
 //  Created by Oğuzhan Karakuş on 17.04.2020.
@@ -8,19 +8,20 @@
 
 import Foundation
 
-// MARK: - SimilarMovies
-struct SimilarMovies: Codable {
+// MARK: - MovieList
+struct MovieList: Codable {
+    let posterPath: String?
     let id: Int
-    let title, releaseDate: String
     let backdropPath: String?
-    let overview, posterPath: String?
+    let title: String
+    let overview, releaseDate: String
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case title
-        case releaseDate = "release_date"
-        case backdropPath = "backdrop_path"
-        case overview
         case posterPath = "poster_path"
+        case id
+        case backdropPath = "backdrop_path"
+        case title
+        case overview
+        case releaseDate = "release_date"
     }
 }
