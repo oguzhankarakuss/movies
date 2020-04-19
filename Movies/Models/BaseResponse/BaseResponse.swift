@@ -9,11 +9,23 @@
 import Foundation
 
 struct BaseResponse<T: Codable>: Codable {
-    let results: [T]?
-    let page, totalResults: Int?
-    let dates: Dates?
-    let totalPages: Int?
-
+    var results: [T]?
+    var page, totalResults: Int?
+    var dates: Dates?
+    var totalPages: Int?
+    
+    public init(results: [T]?,
+                page: Int?,
+                totalResults: Int?,
+                dates: Dates?,
+                totalPages: Int?) {
+        
+        self.results = results
+        self.totalResults = totalResults
+        self.page = page
+        self.dates = dates
+        self.totalPages = totalPages
+    }
     enum CodingKeys: String, CodingKey {
         case results, page
         case totalResults = "total_results"
