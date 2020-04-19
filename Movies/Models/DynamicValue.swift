@@ -6,12 +6,13 @@
 //  Copyright © 2020 Oğuzhan Karakuş. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-typealias CompletionHandler = (() -> Void)
 class DynamicValue<T> {
     
-    var value: T {
+    typealias CompletionHandler = ((T) -> Void)
+    
+    var value : T {
         didSet {
             self.notify()
         }
@@ -33,10 +34,11 @@ class DynamicValue<T> {
     }
     
     private func notify() {
-        observers.forEach({ $0.value() })
+        observers.forEach({ $0.value(value) })
     }
     
     deinit {
         observers.removeAll()
     }
 }
+
