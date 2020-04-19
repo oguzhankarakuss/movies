@@ -12,6 +12,7 @@ class BaseTableView: UITableView {
     
     public convenience init(
         style: UITableView.Style = .plain,
+        cells: [BaseTableViewCell.Type],
         separatorStyle: UITableViewCell.SeparatorStyle = .none,
         separatorInset: UIEdgeInsets = .zero,
         contentInset: UIEdgeInsets = .zero,
@@ -19,6 +20,11 @@ class BaseTableView: UITableView {
         backgroundColor: UIColor? = .white) {
         
         self.init(style: style)
+        
+        for cell in cells {
+            register(cell, forCellReuseIdentifier: cell.reuseIdentifier)
+          }
+        
         self.separatorStyle = separatorStyle
         self.separatorInset = separatorInset
         self.contentInset = contentInset
