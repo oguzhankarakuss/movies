@@ -10,14 +10,36 @@ import Alamofire
 
 class Service {
     @discardableResult
-    private static func performRequest<T:Decodable>(route:Router, decoder: JSONDecoder = JSONDecoder(), completion: @escaping (AFResult<T>)->Void) -> DataRequest {
+    private static func performRequest<T:Decodable>(route:Router,
+                                                    decoder: JSONDecoder = JSONDecoder(),
+                                                    showLoading: Bool = true,
+                                                    completion: @escaping (AFResult<T>)->Void) -> DataRequest {
+        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        let progressHUD = ProgressHUD()
+        if showLoading {
+            if let window = keyWindow {
+                progressHUD.frame = window.bounds
+                window.addSubview(progressHUD)
+            }
+        }
         
         return AF.request(route).responseDecodable (decoder: decoder) { (response: AFDataResponse<T>) in
+            if showLoading {
+                progressHUD.removeFromSuperview()
+            }
+            if response.error != nil {
+                if var topController = keyWindow?.rootViewController {
+                    while let presentedViewController = topController.presentedViewController {
+                        topController = presentedViewController
+                    }
+                    topController.presentAlert()
+                }
+            }
             completion(response.result)
         }
     }
     //    MARK: - Upcoming
-    static func upcoming(page: Int, completion: @escaping (AFResult<BaseResponse<Upcoming>>)->Void) {
+    static func upcoming(page: Int, completion: @escaping (AFResult<BaseResponse<MovieList>>)->Void) {
         performRequest(route: .upcoming(page: page), completion: completion)
     }
     
@@ -27,12 +49,12 @@ class Service {
     }
     
     //    MARK: - SearchMovie
-    static func searchMovie(query: String, page: Int, completion: @escaping (AFResult<BaseResponse<SearchMovie>>)->Void) {
-        performRequest(route: .searchMovie(query: query, page: page), completion: completion)
+    static func searchMovie(query: String, page: Int, completion: @escaping (AFResult<BaseResponse<MovieList>>)->Void) {
+        performRequest(route: .searchMovie(query: query, page: page), showLoading: false, completion: completion)
     }
     
     //    MARK: - MoviewDetail
-    static func movieDetail(movieId: Int, completion: @escaping (AFResult<MoviewDetail>)->Void) {
+    static func movieDetail(movieId: Int, completion: @escaping (AFResult<MovieDetail>)->Void) {
         performRequest(route: .movieDetail(movieId: movieId), completion: completion)
     }
     
