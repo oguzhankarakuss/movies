@@ -141,7 +141,9 @@ private extension MovieDetailTableViewCell {
             titleLabel.text = movieDetail.title
             descriptionLabel.text = movieDetail.overview
             dateLabel.text = movieDetail.releaseDate
-            rateLabel.text = "\(movieDetail.voteAverage)"
+            if let voteAverage = movieDetail.voteAverage {
+                rateLabel.text = "\(voteAverage)"
+            }
         }
     }
     
