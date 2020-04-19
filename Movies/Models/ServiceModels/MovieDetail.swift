@@ -10,13 +10,13 @@ import Foundation
 
 // MARK: - Welcome
 struct MovieDetail: Codable {
-    let backdropPath: String
-    let id: Int
-    let imdbID, overview: String
-    let posterPath: String
-    let releaseDate: String
-    let title: String
-    let voteAverage: Double
+    let backdropPath: String?
+    let id: Int?
+    let imdbID, overview: String?
+    let posterPath: String?
+    let releaseDate: String?
+    let title: String?
+    let voteAverage: Double?
 
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
