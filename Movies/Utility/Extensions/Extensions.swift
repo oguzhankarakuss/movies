@@ -82,12 +82,76 @@ extension UIImageView {
     /// - Parameters:
     ///   - url: url of the image.
     ///   - placeholder: placeholder image of the image view.
-    func setImage(url: URL?, placeholder: UIImage? = nil, _ completion: ((_ image: UIImage?) -> Void)? = nil) {
-        guard let aUrl = url else {
+    func setImage(urlString: String?, placeholder: UIImage? = nil, _ completion: ((_ image: UIImage?) -> Void)? = nil) {
+        guard let urlStr = urlString, let aUrl = URL(string: urlStr) else {
             image = placeholder
             return
         }
-        kf.setImage(with: aUrl, placeholder: placeholder)
+        guard let imageURL = URL(string:"\(ServiceConstants.ProductionServer.imageBaseURL)\(aUrl.absoluteString)") else {
+            image = placeholder
+            return
+        }
+        
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.color = .darkGray
+        activityIndicator.startAnimating()
+        addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { $0.center.equalToSuperview() }
+        
+        kf.setImage(with: imageURL) { (result) in
+            switch result {
+            case .failure(_):
+                activityIndicator.stopAnimating()
+                self.image = placeholder
+            case .success(let response):
+                activityIndicator.stopAnimating()
+                self.image = response.image
+            }
+        }
+    }
+    
+}
+
+// MARK: - UIView
+extension UIView {
+    func addSubviews(_ subviews: [UIView]) {
+        subviews.forEach { addSubview($0) }
+    }
+}
+
+// MARK: - UIViewController - UIAlertController
+extension UIViewController {
+    @discardableResult func presentAlert(
+        title: String? = "Oopss :(",
+        message: String? = "An unexpected error has occurred.",
+        preferredStyle: UIAlertController.Style = .alert,
+        tintColor: UIColor? = nil,
+        actions: [UIAlertAction] = [],
+        animated: Bool = true,
+        completion: (() -> Void)? = nil) -> UIAlertController {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+        
+        if actions.isEmpty {
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+        }
+        
+        for action in actions {
+            alert.addAction(action)
+        }
+        
+        if let color = tintColor {
+            alert.view.tintColor = color
+        }
+        
+        present(alert, animated: animated, completion: completion)
+        
+        if let color = tintColor {
+            alert.view.tintColor = color
+        }
+        
+        return alert
     }
     
 }
